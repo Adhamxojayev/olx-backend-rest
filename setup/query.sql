@@ -15,4 +15,3 @@ join categories cg on cg.category_id = c.category_id;
 
 
 
-

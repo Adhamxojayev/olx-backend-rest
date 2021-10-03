@@ -4,6 +4,7 @@ import multer from 'multer'
 import path from 'path'
 import usersRouter from './router/auth.js'
 import addRouter from './router/ads.js'
+import categoiresRouter from './router/categories.js'
 
 const app = express()
 
@@ -28,6 +29,7 @@ app.use(upload.single('image'))
 app.use(express.static(path.join(process.cwd(), 'src', 'uploads')))
 app.use(usersRouter)
 app.use(addRouter)
+app.use(categoiresRouter)
 
 
 app.listen(PORT, () => console.log(`server run http://${host}:${PORT}`))
