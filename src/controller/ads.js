@@ -1,9 +1,10 @@
-import {adsAdd} from '../modul/ads.js'
+import {adsAdd, adsGet} from '../modul/ads.js'
 import jwt from '../lib/jwt.js'
 
 
 const ADD = async (req,res) => {
     try {
+        req.body.image = req.fileName
         let user = jwt.verify(req.headers.token)
         req.body.user_id = user.userId
         let added = await adsAdd(req.body)
@@ -24,6 +25,20 @@ const ADD = async (req,res) => {
     }
 }
 
+const GET = async (req,res) => {
+    try {
+        let ads = await adsGet()
+        res.json(ads)
+    } catch (error) {
+        res.json({
+            status: 404,
+            message: error,
+            data: null
+        })
+    }
+}
+
 export {
-    ADD
+    ADD,
+    GET
 }

@@ -12,6 +12,11 @@ const ADD = `
     ) values ($1, $2, $3, $4, $5, $6)
     returning *
 `
+const GET = `
+    select 
+        * 
+    from ads
+`
 
 
 const adsAdd = ({user_id, category_id, image, name, price, reference}) => {
@@ -22,6 +27,16 @@ const adsAdd = ({user_id, category_id, image, name, price, reference}) => {
     }
 }
 
+const adsGet = () => {
+    try {
+        return db(GET)
+    } catch (error) {
+        
+    }
+}
+
+
 export {
-    adsAdd
+    adsAdd,
+    adsGet
 }
