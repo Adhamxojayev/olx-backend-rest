@@ -1,4 +1,4 @@
-import {adsAdd, adsGet} from '../modul/ads.js'
+import {adsAdd, adsGet, deleteAds} from '../modul/ads.js'
 import jwt from '../lib/jwt.js'
 
 
@@ -38,7 +38,28 @@ const GET = async (req,res) => {
     }
 }
 
+const DELETE = async (req,res) => {
+    try {
+        let ads = await deleteAds(req.body)
+        if(ads.length) {
+            res.json({
+                status: 200,
+                message: "ads deleted",
+                data: ads
+            })
+        }
+        else throw new Error("error in deleting the ad")
+    } catch (error) {
+        res.json({
+            status: 400,
+            message: error.message,
+            data: null
+        })
+    }
+}
+
 export {
     ADD,
-    GET
+    GET,
+    DELETE
 }

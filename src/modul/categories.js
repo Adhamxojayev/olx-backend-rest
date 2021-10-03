@@ -9,6 +9,13 @@ const GET = `
     group by c.name;
 `
 
+const POST = `
+    insert into 
+    categories (name)
+    values ($1)
+    returning *
+`
+
 
 const categoiresGET = () => { 
     try {
@@ -18,6 +25,17 @@ const categoiresGET = () => {
     }
 }
 
+
+const categoriesPOST = ({name}) => {
+    try {
+        console.log(name);
+        return db(POST, [name])
+    } catch (error) {
+        
+    }
+}
+
 export {
-    categoiresGET
+    categoiresGET,
+    categoriesPOST
 }

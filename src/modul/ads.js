@@ -17,6 +17,13 @@ const GET = `
         * 
     from ads
 `
+const DELETE = `
+    delete from 
+    ads
+    where ads_id = $1
+    returning *
+`
+
 
 
 const adsAdd = ({user_id, category_id, image, name, price, reference}) => {
@@ -35,8 +42,16 @@ const adsGet = () => {
     }
 }
 
+const deleteAds = ({adsId}) => {
+    try {
+        return db(DELETE, [adsId])
+    } catch (error) {
+        
+    }
+}
 
 export {
     adsAdd,
-    adsGet
+    adsGet,
+    deleteAds
 }
