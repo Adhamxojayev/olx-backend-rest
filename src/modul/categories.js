@@ -16,6 +16,12 @@ const POST = `
     returning *
 `
 
+const POSTcategory = `
+    insert into categories_category (category_id, id, name)
+    values ($1, $2, $3)
+    returning *
+`
+
 
 const categoiresGET = () => { 
     try {
@@ -35,7 +41,16 @@ const categoriesPOST = ({name}) => {
     }
 }
 
+const POSTcateg = ({category_id, id, name}) => {
+    try {
+        return db(POSTcategory, [category_id, id, name])
+    } catch (error) {
+        
+    }
+}
+
 export {
     categoiresGET,
-    categoriesPOST
+    categoriesPOST,
+    POSTcateg
 }
