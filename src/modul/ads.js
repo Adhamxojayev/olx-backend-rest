@@ -1,4 +1,6 @@
 import db from '../lib/postgres.js'
+import moment  from 'moment'
+import 'moment/locale/uz-latn.js'
 
 const ADD = `
     insert into 
@@ -8,8 +10,9 @@ const ADD = `
         image, 
         name, 
         price, 
-        reference
-    ) values ($1, $2, $3, $4, $5, $6)
+        reference,
+        date
+    ) values ($1, $2, $3, $4, $5, $6, $7)
     returning *
 `
 const GET = `
@@ -28,7 +31,9 @@ const DELETE = `
 
 const adsAdd = ({user_id, category_id, image, name, price, reference}) => {
     try {
-        return db(ADD, [user_id, category_id, image, name, price, reference])
+        let date = moment().format('LLLL')
+        image = 'http://localhost:5000/' + image
+        return db(ADD, [user_id, category_id, image, name, price, reference, date])
     } catch (error) {
         
     }

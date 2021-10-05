@@ -22,5 +22,4 @@ insert into categories_category (category_id, id, name) values
 
 
 insert into ads( user_id, category_id, image, name, price, reference) values
-(1,5, 'https://picsum.photos/400', 'baroqvoy', '100$', 'yaxshi mushuk'),
-(2,1, 'https://picsum.photos/400', 'hp', '600$', 'ssd 528 display 13 model pavilon');
+(1,2, 'https://picsum.photos/400', 'samsung A6', '150$', 'yaxshi telefon bu ishon');

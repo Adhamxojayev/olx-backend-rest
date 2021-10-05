@@ -28,7 +28,7 @@ const ADD = async (req,res) => {
 const GET = async (req,res) => {
     try {
         let ads = await adsGet()
-        res.json(ads)
+        return res.json(ads)
     } catch (error) {
         res.json({
             status: 404,

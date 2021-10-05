@@ -29,7 +29,8 @@ create table ads(
     image varchar(500) not null,
     name varchar(200) not null,
     price varchar(40) not null,
-    reference varchar(500) not null
+    reference varchar(500) not null,
+    date text not null
 );
 
 comment on table users is 'userlar haqida malumot';
