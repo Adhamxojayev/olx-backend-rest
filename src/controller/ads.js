@@ -1,4 +1,4 @@
-import {adsAdd, adsGet, deleteAds} from '../modul/ads.js'
+import {adsAdd, adsGet, deleteAds, GETparams} from '../modul/ads.js'
 import jwt from '../lib/jwt.js'
 
 
@@ -58,8 +58,22 @@ const DELETE = async (req,res) => {
     }
 }
 
+const GETPARAMS = async (req,res) => {
+    try {
+        let ads = await GETparams(req.params)
+        return res.json(ads)
+    } catch (error) {
+        res.json({
+            status: 404,
+            message: error,
+            data: null
+        })
+    }
+}
+
 export {
     ADD,
     GET,
-    DELETE
+    DELETE,
+    GETPARAMS
 }

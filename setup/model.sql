@@ -33,6 +33,7 @@ create table ads(
     date text not null
 );
 
+
 comment on table users is 'userlar haqida malumot';
 comment on table categories is 'assosiy categoryalar';
 comment on table categories_category is 'assosiy categoriylarni ichidagi categorylar';

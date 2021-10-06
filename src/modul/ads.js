@@ -26,7 +26,20 @@ const DELETE = `
     where ads_id = $1
     returning *
 `
-
+const ADSPARAMS = `
+    select 
+        a.name as title,
+        a.image,
+        a.price,
+        a.reference,
+        a.date,
+        a.ads_id,
+        u.name,
+        u.tel_number,
+        u.email
+        from ads a 
+        join users u on u.user_id = a.user_id and a.ads_id = $1
+`
 
 
 const adsAdd = ({user_id, category_id, image, name, price, reference}) => {
@@ -54,9 +67,17 @@ const deleteAds = ({adsId}) => {
         
     }
 }
+ const GETparams = ({ads_id}) => {
+     try {
+        return db(ADSPARAMS, [ads_id])
+     } catch (error) {
+         
+     }
+ }
 
 export {
     adsAdd,
     adsGet,
-    deleteAds
+    deleteAds,
+    GETparams
 }
