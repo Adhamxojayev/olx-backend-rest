@@ -4,6 +4,9 @@ import jwt from '../lib/jwt.js'
 
 const ADD = async (req,res) => {
     try {
+        // mock data
+        req.headers.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTYzMzc2NjQ3Nn0.Ia0U9NuCEPTfIUL5jlQaMMaKsU3D5W1-x4d-cwR-QQs'
+
         req.body.image = req.fileName
         let user = jwt.verify(req.headers.token)
         req.body.user_id = user.userId

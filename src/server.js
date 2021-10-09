@@ -10,6 +10,11 @@ const app = express()
 
 
 
+app.use( (req,res,next) => {
+    res.set({'Access-Control-Allow-Origin' : '*'})
+    next()
+})
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, path.join(process.cwd(), 'src', 'uploads'))
@@ -23,11 +28,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
-app.use( (req,res,next) => {
-    res.set({'Access-Control-Allow-Origin' : '*'})
-    next()
-})
-
+app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(upload.single('image'))
 app.use(express.static(path.join(process.cwd(), 'src', 'uploads')))
