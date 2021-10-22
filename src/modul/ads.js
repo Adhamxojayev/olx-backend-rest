@@ -40,6 +40,17 @@ const ADSPARAMS = `
         from ads a 
         join users u on u.user_id = a.user_id and a.ads_id = $1
 `
+const SEARCH = `
+    select 
+        a.name as title,
+        a.image,
+        a.price,
+        a.reference,
+        a.date,
+        a.ads_id
+    from ads a
+    where a.name like $1
+`
 
 
 const adsAdd = ({user_id, category_id, image, name, price, reference}) => {
@@ -75,9 +86,18 @@ const deleteAds = ({adsId}) => {
      }
  }
 
+ const adsSearch = ({search}) => {
+     try {
+         return db(SEARCH, [search + '%'])
+     } catch (error) {
+         
+     }
+ }
+
 export {
     adsAdd,
     adsGet,
     deleteAds,
-    GETparams
+    GETparams,
+    adsSearch
 }

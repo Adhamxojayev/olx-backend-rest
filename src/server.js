@@ -1,4 +1,5 @@
 import express from 'express'
+import cookieParser from 'cookie-parser'
 import { host, PORT } from './config.js'
 import multer from 'multer'
 import path from 'path'
@@ -8,10 +9,14 @@ import categoiresRouter from './router/categories.js'
 
 const app = express()
 
+app.use(cookieParser())
 
 
 app.use( (req,res,next) => {
-    res.set({'Access-Control-Allow-Origin' : '*'})
+    res.set({"Access-Control-Allow-Origin":  "http://localhost:4000",
+            "Access-Control-Allow-Methods": "POST",
+            "Access-Control-Allow-Headers": "Content-Type"
+        })
     next()
 })
 
@@ -28,12 +33,12 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
-app.use(express.urlencoded({extended: true}))
 app.use(express.json())
+app.use(express.urlencoded({extended: true}))
 app.use(upload.single('image'))
 app.use(express.static(path.join(process.cwd(), 'src', 'uploads')))
 app.use(usersRouter)
-app.use(addRouter)
+app.use(addRouter) 
 app.use(categoiresRouter)
 
 

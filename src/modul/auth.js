@@ -1,14 +1,12 @@
 import db from '../lib/postgres.js'
-import md5 from 'md5'
 
 const REGISTER = `
     insert into 
     users (
         name, 
-        password, 
         email, 
         tel_number
-    ) values ($1, $2, $3, $4)
+    ) values ($1, $2, $3)
     returning *
 `
 
@@ -24,10 +22,9 @@ const LOGIN = `
 `
 
 
-const userRegister = ({name, password, email, tel}) => {
+const userRegister = ({name,email, tel}) => {
      try {
-         password = md5(password)
-         return db(REGISTER, [name, password, email, tel])
+         return db(REGISTER, [name,email, tel])
      } catch (error) {
          
      }

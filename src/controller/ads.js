@@ -1,15 +1,13 @@
-import {adsAdd, adsGet, deleteAds, GETparams} from '../modul/ads.js'
+import {adsAdd, adsGet, deleteAds, GETparams,adsSearch} from '../modul/ads.js'
 import jwt from '../lib/jwt.js'
 
 
 const ADD = async (req,res) => {
     try {
         // mock data
-        req.headers.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTYzMzc2NjQ3Nn0.Ia0U9NuCEPTfIUL5jlQaMMaKsU3D5W1-x4d-cwR-QQs'
-
+        const {userId} = req.cookies
         req.body.image = req.fileName
-        let user = jwt.verify(req.headers.token)
-        req.body.user_id = user.userId
+        req.body.user_id = userId
         let added = await adsAdd(req.body)
         if(added.length){
             res.redirect('http://localhost:4000/')
@@ -70,9 +68,26 @@ const GETPARAMS = async (req,res) => {
     }
 }
 
+const SEARCH = async (req,res) => {
+    try {
+        let search  = await adsSearch(req.body)
+        if(search){
+            return res.json(search)
+        }
+        else throw new Error('error')
+    } catch (error) {
+        res.json({
+            status: 404,
+            message: error.message,
+            data: null
+        })
+    }
+}
+
 export {
     ADD,
     GET,
     DELETE,
-    GETPARAMS
+    GETPARAMS,
+    SEARCH
 }

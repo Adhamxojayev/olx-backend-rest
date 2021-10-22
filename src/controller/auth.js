@@ -5,13 +5,9 @@ import jwt from '../lib/jwt.js'
 const REGISTER = async (req,res) => {
     try {
         let user = await userRegister(req.body)
-        if(user){
-            console.log(user);
-            res.json({
-                status: 201,
-                message: 'you are registered',
-                token: jwt.sign({userId: user[0].user_id})
-            })
+        if(user.length){
+            res.cookie('userId',user[0].user_id)
+            res.redirect('http://localhost:4000/')
         }else throw new Error('there is an error in registration')
     } catch (error) {
         res.json({
