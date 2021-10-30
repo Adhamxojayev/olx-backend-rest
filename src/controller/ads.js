@@ -71,8 +71,8 @@ const GETPARAMS = async (req,res) => {
 const SEARCH = async (req,res) => {
     try {
         let search  = await adsSearch(req.body)
-        if(search){
-            return res.json(search)
+        if(search.length){
+            res.json(search)            
         }
         else throw new Error('error')
     } catch (error) {

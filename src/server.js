@@ -10,6 +10,7 @@ import categoiresRouter from './router/categories.js'
 const app = express()
 
 app.use(cookieParser())
+app.use(express.json())
 
 
 app.use( (req,res,next) => {
@@ -19,6 +20,7 @@ app.use( (req,res,next) => {
         })
     next()
 })
+
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -33,7 +35,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
-app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(upload.single('image'))
 app.use(express.static(path.join(process.cwd(), 'src', 'uploads')))
