@@ -88,7 +88,7 @@ const deleteAds = ({adsId}) => {
 
  const adsSearch = ({search}) => {
      try {
-         return db(SEARCH, [search + '%'])
+         return db(SEARCH, ['%' + search + '%'])
      } catch (error) {
          
      }
