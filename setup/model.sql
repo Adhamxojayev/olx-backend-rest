@@ -1,5 +1,4 @@
-
-create database olx;
+create database sotildi;
 
 
 create table users (
@@ -12,13 +11,16 @@ create table users (
 
 create table categories(
     category_id serial primary key,
-    name varchar(50) not null
+    name varchar(50) not null,
+    status varchar(60) not null default 'active'
 );
 
 create table categories_category(
-    category_id int not null references categories(category_id),
     id int not null primary key,
-    name varchar(50) not null
+    category_id int not null references categories(category_id),
+    name varchar(50) not null,
+    status varchar(60) not null default 'active'
+
 );
 
 create table ads(
@@ -29,7 +31,8 @@ create table ads(
     name varchar(200) not null,
     price varchar(40) not null,
     reference varchar(500) not null,
-    date text not null
+    date text not null,
+    status varchar(60) not null default 'active'
 );
 
 

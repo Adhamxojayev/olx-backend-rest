@@ -2,8 +2,6 @@ import {categoiresGET,categoriesPOST,POSTcateg} from '../modul/categories.js'
 import jwt from '../lib/jwt.js'
 
 
-
-
 const GET = async (req,res) => {
     try {
         let categories = await categoiresGET()

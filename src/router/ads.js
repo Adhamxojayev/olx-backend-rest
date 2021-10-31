@@ -1,8 +1,7 @@
 import express from 'express'
+import {ADD,GET,DELETE,GETPARAMS, SEARCH} from '../controller/ads.js'
 
 const router = express.Router()
-
-import {ADD,GET,DELETE,GETPARAMS, SEARCH} from '../controller/ads.js'
 
 
 router.post('/add', ADD)
